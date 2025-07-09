@@ -52,15 +52,18 @@ public:
 
 		for (int i = 0; i < 100; ++i)
 		{
-			segments->AddVertex(gp_Pnt(0, 0, i));
-			segments->AddVertex(gp_Pnt(100, 0, i));
-			segments->AddVertex(gp_Pnt(0, 0, i));
-			segments->AddVertex(gp_Pnt(0, 100, i));
+			auto idx = segments->AddVertex(gp_Pnt(0, 0, i));
+			segments->SetVertexColor(idx, Quantity_NOC_RED);
+			idx = segments->AddVertex(gp_Pnt(100, 0, i));
+			segments->SetVertexColor(idx, Quantity_NOC_BLUE);
 
-			segments->SetVertexColor(i + 1, Quantity_NOC_ORCHID1);
-			segments->SetVertexColor(i + 2, Quantity_NOC_ORCHID1);
-			segments->SetVertexColor(i + 3, Quantity_NOC_SALMON1);
-			segments->SetVertexColor(i + 4, Quantity_NOC_PEACHPUFF2);
+			idx = segments->AddVertex(gp_Pnt(0, 0, i));
+			segments->SetVertexColor(idx, Quantity_NOC_YELLOW);
+
+			idx = segments->AddVertex(gp_Pnt(0, 100, i));
+			segments->SetVertexColor(idx, Quantity_NOC_RED);
+
+			
 		}
 		
 		Handle(Graphic3d_AspectLine3d) aLineAspect = new Graphic3d_AspectLine3d(Quantity_NOC_PINK4, Aspect_TOL_SOLID, 0.1);
