@@ -51,14 +51,15 @@ public:
 
 		for (int i = 0; i < 1000000; ++i)
 		{
-			segments->AddVertex(gp_Pnt(0, 0, i*0.1), Quantity_NOC_GREEN);
-			segments->AddVertex(gp_Pnt(100, 0, i * 0.1), Quantity_NOC_GREEN);
+			segments->AddVertex(gp_Pnt(0, 0, i*0.1));
+			segments->AddVertex(gp_Pnt(100, 0, i * 0.1));
 
-			segments->AddVertex(gp_Pnt(0, 0, i * 0.1), Quantity_NOC_GREEN);
-			segments->AddVertex(gp_Pnt(0, 100, i * 0.1), Quantity_NOC_GREEN);
-
-			
+			segments->AddVertex(gp_Pnt(0, 0, i * 0.1));
+			segments->AddVertex(gp_Pnt(0, 100, i * 0.1));
 		}
+		
+		Handle(Graphic3d_AspectLine3d) aLineAspect = new Graphic3d_AspectLine3d(Quantity_NOC_PINK4, Aspect_TOL_SOLID, 0.1);
+		group->SetPrimitivesAspect(aLineAspect);
 		group->AddPrimitiveArray(segments);
 
 		// view setup
