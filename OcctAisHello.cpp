@@ -15,6 +15,7 @@
 #include <V3d_RectangularGrid.hxx>
 #include <Prs3d_Presentation.hxx>
 #include <Graphic3d_ArrayOfSegments.hxx>
+#include <Graphic3d_Text.hxx>
 
 #ifdef _MSC_VER
 #pragma comment(lib, "TKOpenGl.lib")
@@ -47,20 +48,25 @@ public:
 		Handle(Prs3d_Presentation) ap = new Prs3d_Presentation(aViewer->StructureManager());
 
 		Handle(Graphic3d_Group) group = ap->NewGroup();
-		Handle(Graphic3d_ArrayOfSegments) segments = new Graphic3d_ArrayOfSegments(4000000, 0, Standard_True);
+		Handle(Graphic3d_ArrayOfSegments) segments = new Graphic3d_ArrayOfSegments(40000, 0, Standard_True);
 
-		for (int i = 0; i < 1000000; ++i)
+		for (int i = 0; i < 100; ++i)
 		{
-			segments->AddVertex(gp_Pnt(0, 0, i*0.1));
-			segments->AddVertex(gp_Pnt(100, 0, i * 0.1));
+			segments->AddVertex(gp_Pnt(0, 0, i));
+			segments->AddVertex(gp_Pnt(100, 0, i));
 
-			segments->AddVertex(gp_Pnt(0, 0, i * 0.1));
-			segments->AddVertex(gp_Pnt(0, 100, i * 0.1));
+			segments->AddVertex(gp_Pnt(0, 0, i));
+			segments->AddVertex(gp_Pnt(0, 100, i));
 		}
 		
 		Handle(Graphic3d_AspectLine3d) aLineAspect = new Graphic3d_AspectLine3d(Quantity_NOC_PINK4, Aspect_TOL_SOLID, 0.1);
 		group->SetPrimitivesAspect(aLineAspect);
 		group->AddPrimitiveArray(segments);
+
+		auto aText = new Graphic3d_Text(1.0f / 81.0f);
+		aText->SetText("Y");
+		aText->SetPosition(gp_Pnt(0, 20, 0));
+		group->AddText(aText);
 
 		// view setup
 		myView = new V3d_View(aViewer);
